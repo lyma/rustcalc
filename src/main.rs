@@ -60,6 +60,7 @@ struct CalcApp {
     radians: bool,
     memory: Option<f64>,
     error: Option<String>,
+    show_about: bool,
 }
 
 impl CalcApp {
@@ -74,6 +75,7 @@ impl CalcApp {
             radians: true,
             memory: None,
             error: None,
+            show_about: false,
         }
     }
 
@@ -173,7 +175,13 @@ impl CalcApp {
 
     fn top_bar(&mut self, ui: &mut egui::Ui) {
         ui.horizontal(|ui| {
-            ui.label(RichText::new("RustCalc").strong().size(15.0).color(ACCENT));
+            if ui
+                .label(RichText::new("RustCalc").strong().size(15.0).color(ACCENT))
+                .on_hover_text("Sobre")
+                .clicked()
+            {
+                self.show_about = !self.show_about;
+            }
             ui.with_layout(egui::Layout::right_to_left(Align::Center), |ui| {
                 ui.selectable_value(&mut self.mode, Mode::Scientific, "Científica");
                 ui.selectable_value(&mut self.mode, Mode::Basic, "Básica");
@@ -360,6 +368,24 @@ impl CalcApp {
             _ => {}
         }
     }
+
+    fn about_window(&mut self, ui: &mut egui::Ui) {
+        egui::Window::new("Sobre")
+            .collapsible(false)
+            .resizable(false)
+            .show(ui.ctx(), |ui| {
+                ui.heading("RustCalc");
+                ui.label(format!("Versão {}", env!("CARGO_PKG_VERSION")));
+                ui.add_space(8.0);
+                ui.label("Calculadora gráfica em Rust com modos básico e científico.");
+                ui.add_space(8.0);
+                ui.label("Autor: João Lyma");
+                ui.add_space(4.0);
+                ui.hyperlink("https://github.com/lyma/rustcalc");
+                ui.add_space(8.0);
+                ui.label("Licença: MIT");
+            });
+    }
 }
 
 impl eframe::App for CalcApp {
@@ -393,6 +419,10 @@ impl eframe::App for CalcApp {
                 }
             }
         });
+
+        if self.show_about {
+            self.about_window(ui);
+        }
     }
 }
 
