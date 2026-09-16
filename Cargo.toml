@@ -1,0 +1,17 @@
+[package]
+name = "rustcalc"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+description = "Calculadora gráfica em Rust com modos básico e científico."
+license = "MIT"
+keywords = ["calculator", "gui", "egui", "math"]
+categories = ["mathematics", "gui"]
+
+[dependencies]
+eframe = "0.36"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
