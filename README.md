@@ -18,7 +18,13 @@ laranja — tudo sem nenhuma dependência além de [egui/eframe](https://github.
 - **Resultado contínuo** — use o `ans` da última conta em uma nova expressão.
 - **Engine própria** com parser recursivo-descendente testado.
 
-## Como executar
+## Baixar (Windows)
+
+Não quer compilar? Baixe o instalável **`rustcalc.exe`** diretamente da
+[última release](https://github.com/lyma/rustcalc/releases) — compilado
+automaticamente pelo GitHub Actions, sem precisar de Rust instalado.
+
+## Compilar a partir do código
 
 Requisitos: [Rust](https://rustup.rs) (edition 2021, MSRV 1.85).
 

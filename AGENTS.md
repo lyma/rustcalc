@@ -56,3 +56,20 @@ rustup toolchain install stable-x86_64-pc-windows-gnu
 ```
 
 - Como a build roda em `wasm-pack`? Não roda: é nativa só de desktop.
+
+## Publicação de release
+
+- `.github/workflows/release.yml` compila `cargo build --release` no
+  `windows-latest` e anexa o `rustcalc.exe` à release do GitHub.
+- O workflow dispara **ao subir uma tag `v*`** (e manualmente via Actions):
+
+```sh
+git tag v0.1.1 && git push origin v0.1.1
+```
+
+- Reamento da tag de release exige sincronizar `version` em `Cargo.toml` com a
+  tag `v*`.
+- O repositório é **público** no GitHub: antes de cada push, confirme que nenhum
+  token/segredo entrou no diff (`ghp_`, `github_pat_`, chaves, etc).
+- Nunca commitar o token de acesso; a autenticação fica no credential manager
+  local, fora do repositório.

@@ -3,6 +3,13 @@
 Uma calculadora em Rust com dois modos: **Básica** e **Científica**.
 Use o mouse ou o teclado físico. O `Enter` no campo de expressão equivale a `=`.
 
+## Onde baixar
+
+- **Windows (recomendado):** baixe o `rustcalc.exe` pronto em
+  https://github.com/lyma/rustcalc/releases — não precisa instalar nada.
+- **Compilar do código:** [Rust](https://rustup.rs) instalado, então
+  `cargo run --release` na raiz do projeto.
+
 ---
 
 ## Tela
